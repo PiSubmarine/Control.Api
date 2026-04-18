@@ -6,7 +6,7 @@ namespace PiSubmarine::Control::Api::Input
 {
     TEST(OperatorCommandTest, StoresAllConfiguredInputs)
     {
-        const auto movement = Horizontal::Create(
+        const auto movement = Control::Horizontal::Api::Command::Create(
             SignedNormalizedFraction(0.50),
             SignedNormalizedFraction(0.25));
 
@@ -14,13 +14,13 @@ namespace PiSubmarine::Control::Api::Input
 
         const OperatorCommand command{
             .Movement = movement.value(),
-            .VerticalControl = Vertical::SetDepthTargetTo(3.0_m),
-            .GimbalTarget = Gimbal::Create(0.5_rad),
-            .LampIntensity = Lamp::Create(NormalizedFraction(0.70)),
+            .VerticalControl = Control::Vertical::Api::Command::SetDepthTargetTo(3.0_m),
+            .GimbalTarget = Control::Gimbal::Api::Command::Create(0.5_rad),
+            .LampIntensity = Control::Lamp::Api::Command::Create(NormalizedFraction(0.70)),
             .ModeRequest = Mode::Request::HoldPositionValue()};
 
         EXPECT_EQ(command.Movement, movement.value());
-        EXPECT_TRUE(command.VerticalControl.Is<Vertical::SetDepthTarget>());
+        EXPECT_TRUE(command.VerticalControl.Is<Control::Vertical::Api::Command::SetDepthTarget>());
         ASSERT_TRUE(command.GimbalTarget.has_value());
         EXPECT_EQ(command.GimbalTarget->Pitch(), 0.5_rad);
         ASSERT_TRUE(command.LampIntensity.has_value());

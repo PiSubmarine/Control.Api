@@ -5,13 +5,9 @@ include(FetchContent)
 project(${PISUBMARINE_MODULE_NAME}.Test LANGUAGES CXX)
 
 set(${PISUBMARINE_MODULE_NAME}.Test.Sources
-        "PiSubmarine/Control/Api/Input/GimbalTest.cpp"
-        "PiSubmarine/Control/Api/Input/HorizontalTest.cpp"
         "PiSubmarine/Control/Api/Input/ISinkMockTest.cpp"
-        "PiSubmarine/Control/Api/Input/LampTest.cpp"
         "PiSubmarine/Control/Api/Input/Mode/RequestTest.cpp"
-        "PiSubmarine/Control/Api/Input/OperatorCommandTest.cpp"
-        "PiSubmarine/Control/Api/Input/VerticalTest.cpp")
+        "PiSubmarine/Control/Api/Input/OperatorCommandTest.cpp")
 
 enable_testing()
 
