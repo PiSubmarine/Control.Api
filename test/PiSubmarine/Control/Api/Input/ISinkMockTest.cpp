@@ -1,13 +1,15 @@
 #include <gtest/gtest.h>
 
 #include "PiSubmarine/Control/Api/Input/ISinkMock.h"
+#include "PiSubmarine/Control/Horizontal/Api/Command.h"
+#include "PiSubmarine/Control/Vertical/Api/Command.h"
 
 namespace PiSubmarine::Control::Api::Input
 {
     TEST(ISinkMockTest, SubmitReturnsConfiguredSuccess)
     {
         ISinkMock sinkMock;
-        const auto movement = Horizontal::Create(
+        const auto movement = Horizontal::Api::Command::Create(
             SignedNormalizedFraction(0.40),
             SignedNormalizedFraction(0.20));
 
@@ -15,7 +17,7 @@ namespace PiSubmarine::Control::Api::Input
 
         const OperatorCommand command{
             .Movement = movement.value(),
-            .VerticalControl = Vertical::KeepCurrentValue(),
+            .VerticalControl = Vertical::Api::Command::KeepCurrentValue(),
             .GimbalTarget = std::nullopt,
             .LampIntensity = std::nullopt,
             .ModeRequest = std::nullopt};
