@@ -7,6 +7,7 @@
 #include "PiSubmarine/Control/Horizontal/Api/Command.h"
 #include "PiSubmarine/Control/Lamp/Api/Command.h"
 #include "PiSubmarine/Control/Vertical/Api/Command.h"
+#include "PiSubmarine/Control/Video/Api/Command.h"
 
 namespace PiSubmarine::Control::Api::Input
 {
@@ -16,6 +17,7 @@ namespace PiSubmarine::Control::Api::Input
 		Control::Vertical::Api::Command VerticalControl = Control::Vertical::Api::Command::KeepCurrentValue();
 		std::optional<Control::Gimbal::Api::Command> GimbalTarget;
 		std::optional<Control::Lamp::Api::Command> LampIntensity;
+		std::optional<Control::Video::Api::Command> VideoControl;
 		std::optional<Mode::Request> ModeRequest;
 
 		[[nodiscard]] bool operator==(const OperatorCommand&) const = default;
