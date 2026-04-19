@@ -13,6 +13,7 @@ namespace PiSubmarine::Control::Api::Input
         ASSERT_TRUE(movement.has_value());
 
         const OperatorCommand command{
+            .LeaseId = Lease::Api::LeaseId{.Value = "lease-1"},
             .Movement = movement.value(),
             .VerticalControl = Control::Vertical::Api::Command::SetDepthTargetTo(3.0_m),
             .GimbalTarget = Control::Gimbal::Api::Command::Create(0.5_rad),
@@ -22,6 +23,7 @@ namespace PiSubmarine::Control::Api::Input
                 Control::Video::Api::AutoFocus{}),
             .ModeRequest = Mode::Request::HoldPositionValue()};
 
+        EXPECT_EQ(command.LeaseId.Value, "lease-1");
         EXPECT_EQ(command.Movement, movement.value());
         EXPECT_TRUE(command.VerticalControl.Is<Control::Vertical::Api::Command::SetDepthTarget>());
         ASSERT_TRUE(command.GimbalTarget.has_value());

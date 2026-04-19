@@ -16,10 +16,12 @@ namespace PiSubmarine::Control::Api::Input
         ASSERT_TRUE(movement.has_value());
 
         const OperatorCommand command{
+            .LeaseId = Lease::Api::LeaseId{.Value = "lease-1"},
             .Movement = movement.value(),
             .VerticalControl = Vertical::Api::Command::KeepCurrentValue(),
             .GimbalTarget = std::nullopt,
             .LampIntensity = std::nullopt,
+            .VideoControl = std::nullopt,
             .ModeRequest = std::nullopt};
 
         EXPECT_CALL(sinkMock, Submit(command))
